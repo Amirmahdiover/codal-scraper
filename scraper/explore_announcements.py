@@ -41,7 +41,26 @@ async def get_announcements(
             "Length": "-1",
             "Category": "-1",
         }
-
+        # params = {
+        #     "Audited": "true",
+        #     "AuditorRef": "-1",
+        #     "Category": "1",
+        #     "Childs": "false",
+        #     "CompanyState": "-1",
+        #     "CompanyType": "-1",
+        #     "Consolidatable": "true",
+        #     "IsNotAudited": "false",
+        #     "Length": "-1",
+        #     "LetterType": "6",
+        #     "Mains": "true",
+        #     "NotAudited": "false",
+        #     "NotConsolidatable": "true",
+        #     "PageNumber": "1",
+        #     "Publisher": "false",
+        #     "ReportingType": "-1",
+        #     "TracingNo": "-1",
+        #     "search": "true"
+        # }
         async with semaphore:
             try:
                 async with session.get(url, headers=HEADERS, params=params, timeout=15) as response:

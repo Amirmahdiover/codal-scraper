@@ -1,4 +1,4 @@
-﻿ticker,name,company_id,publisher_status_id,company_type_id,industry_groups_id,company_nature_id,created_at,audited
+﻿ticker,name,external_id,publisher_status_id,company_type_id,industry_groups_id,company_nature_id,created_at,audited
  آذرنگین,آذر نگین,811620.0,-1,-1,-1,1000005,2025-10-29 09:11:47,False
  بنیاد تعاون نیروی انتظامی جمهوری اسلامی ایران,بنیاد تعاون نیروی انتظامی جمهوری اسلامی ایران,811774.0,-1,-1,-1,1000005,2025-10-29 09:11:47,False
  بین المللی خدمات مسافرت هوایی ایرانگردی و جهانگردی آزادی,بین المللی خدمات مسافرت هوایی ایرانگردی و جهانگردی آزادی,811602.0,-1,-1,-1,1000005,2025-10-29 09:11:47,False

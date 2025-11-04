@@ -4,6 +4,7 @@ from scraper.utils import extract_announcement_type_id,to_gregorian_datetime,nor
 
 
 def get_or_create_company(db: Session, name: str, symbol: str = None):
+    # we also normilizing here
     normalized = normalize_persian_text(name)
 
     company = db.query(Company).filter_by(normalized_name=normalized).first()
@@ -16,16 +17,16 @@ def get_or_create_company(db: Session, name: str, symbol: str = None):
     db.refresh(company)
     return company
 
-def get_or_create_company(db: Session, name: str, symbol: str = None):
-    company = db.query(Company).filter_by(name=name).first()
-    if company:
-        return company
+# def get_or_create_company(db: Session, name: str, symbol: str = None):
+#     company = db.query(Company).filter_by(name=name).first()
+#     if company:
+#         return company
     
-    company = Company(name=name, ticker=symbol)
-    db.add(company)
-    db.commit()
-    db.refresh(company)
-    return company
+#     company = Company(name=name, ticker=symbol)
+#     db.add(company)
+#     db.commit()
+#     db.refresh(company)
+#     return company
 
 
 def get_announcement_type_by_id(db: Session, type_id: int):
@@ -65,3 +66,90 @@ def insert_announcement(db, raw_data):
     )
     db.add(ann)
     db.commit()
+
+import pandas as pd
+from db.models import IncomeStatement
+from scraper.label_mapping import label_map
+
+import os
+
+def insert_income_statement(db: Session, df: pd.DataFrame, source_url: str, announcement_id: int):
+    """
+    Transforms and inserts income statement into SQL in pivoted format.
+    One row per company.
+    Logs normalized labels that are not found in label_map, without duplicates.
+    """
+    if df is None or df.empty:
+        return
+
+    company_name = df['company_name'].iloc[0]
+    period_ended=df['periodEndToDate'][0]
+    record = {
+        "company_name": company_name,
+        "source_url": source_url,
+        "period_ended": period_ended,
+        "announcement_id": announcement_id  # ✅ foreign key link
+    }
+    unknown_labels = set()
+
+    for _, row in df.iterrows():
+        original_label = row['label']
+        normalized_label = normalize_persian_text(original_label)
+        amount = row['amount']
+
+        english_field = label_map.get(normalized_label)
+        if english_field:
+            record[english_field] = amount
+        else:
+            unknown_labels.add(normalized_label)
+
+    # Avoid rewriting existing unknowns
+    existing_unknowns = set()
+    unknown_file_path = "unknown_labels.txt"
+    if os.path.exists(unknown_file_path):
+        with open(unknown_file_path, "r", encoding="utf-8") as f:
+            existing_unknowns = set(line.strip() for line in f if line.strip())
+
+    new_unknowns = sorted(unknown_labels - existing_unknowns)
+
+    if new_unknowns:
+        with open(unknown_file_path, "a", encoding="utf-8") as f:
+            for label in new_unknowns:
+                f.write(label + "\n")
+
+    print("✅ Record ready for insert:", record)
+    income_stmt = IncomeStatement(**record)
+    db.add(income_stmt)
+    db.commit()
+
+
+
+def get_audited_notsubtitles_income_statement_urls(db: Session, limit: int = 100) -> list[str]:
+    """
+    Get announcement URLs whose title contains exactly one (حسابرسی شده) wrapped in ()
+    and append &sheetId=1 to the URL.
+    """
+    results = (
+        db.query(Announcement.id,Announcement.url, Announcement.title)
+        .filter(
+            Announcement.title.contains("حسابرسی شده"),
+            Announcement.url.isnot(None)
+        )
+        .order_by(Announcement.published_at.desc())
+        .limit(limit)
+        .all()
+    )
+
+    filtered_urls_ids = []
+    for ann_id,url, title in results:
+        if title.count("(") == 1 and title.count(")") == 1:
+            # Always append "&sheetId=1", even if other query params exist
+            connector = "&" if "?" in url else "?"
+            full_url = f"{url}{connector}sheetId=1"
+            filtered_urls_ids.append({
+                                    "id": ann_id,
+                                    "url": full_url
+                                })
+    return filtered_urls_ids
+
+from db.base_utils import get_model_fields

@@ -45,6 +45,10 @@ def extract_from_json(html: str) -> pd.DataFrame | None:
         json_str = match.group(1)
         data = json.loads(json_str)
 
+
+        period_end = data.get("periodEndToDate")
+
+
         sheets = data.get("sheets", [])
         if not sheets or not sheets[0].get("tables"):
             return None
@@ -66,6 +70,7 @@ def extract_from_json(html: str) -> pd.DataFrame | None:
         )
         income_df['amount'] = income_df['amount'].apply(try_parse_date_or_number)
         income_df['company_name'] = get_company_name(html)
+        income_df['periodEndToDate'] = period_end
         return income_df
     except Exception as e:
         print(f"❌ Error extracting from JSON: {e}")

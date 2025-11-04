@@ -47,7 +47,7 @@ def normalize_persian_text(text: str) -> str:
     replacements = {
         "ي": "ی",
         "ك": "ک",
-        "‌": "",     # ZWNJ
+        # "‌": "",     # ZWNJ
         "‍": "",     # ZWJ
         "ـ": "",     # Tatweel
         "،": ",",
@@ -62,3 +62,12 @@ def normalize_persian_text(text: str) -> str:
     text = re.sub(r"\s+", " ", text)
 
     return text
+
+def safe_float(value):
+    """Convert a value to float if possible, else return None."""
+    try:
+        if value in ("", None, " ", "NaN"):
+            return None
+        return float(value)
+    except (ValueError, TypeError):
+        return None
