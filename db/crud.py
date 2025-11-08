@@ -69,11 +69,11 @@ def insert_announcement(db, raw_data):
 
 import pandas as pd
 from db.models import IncomeStatement
-from scraper.label_mapping import label_map
+
 
 import os
 
-def insert_income_statement(db: Session, df: pd.DataFrame, source_url: str, announcement_id: int):
+def insert_income_statement(db: Session, df: pd.DataFrame):
     """
     Transforms and inserts income statement into SQL in pivoted format.
     One row per company.
@@ -82,43 +82,8 @@ def insert_income_statement(db: Session, df: pd.DataFrame, source_url: str, anno
     if df is None or df.empty:
         return
 
-    company_name = df['company_name'].iloc[0]
-    period_ended=df['periodEndToDate'][0]
-    record = {
-        "company_name": company_name,
-        "source_url": source_url,
-        "period_ended": period_ended,
-        "announcement_id": announcement_id  # ✅ foreign key link
-    }
-    unknown_labels = set()
-
-    for _, row in df.iterrows():
-        original_label = row['label']
-        normalized_label = normalize_persian_text(original_label)
-        amount = row['amount']
-
-        english_field = label_map.get(normalized_label)
-        if english_field:
-            record[english_field] = amount
-        else:
-            unknown_labels.add(normalized_label)
-
-    # Avoid rewriting existing unknowns
-    existing_unknowns = set()
-    unknown_file_path = "unknown_labels.txt"
-    if os.path.exists(unknown_file_path):
-        with open(unknown_file_path, "r", encoding="utf-8") as f:
-            existing_unknowns = set(line.strip() for line in f if line.strip())
-
-    new_unknowns = sorted(unknown_labels - existing_unknowns)
-
-    if new_unknowns:
-        with open(unknown_file_path, "a", encoding="utf-8") as f:
-            for label in new_unknowns:
-                f.write(label + "\n")
-
-    print("✅ Record ready for insert:", record)
-    income_stmt = IncomeStatement(**record)
+    print("✅ Record ready for insert:", df)
+    income_stmt = IncomeStatement(**df)
     db.add(income_stmt)
     db.commit()
 
@@ -131,10 +96,10 @@ def get_audited_notsubtitles_income_statement_urls(db: Session, limit: int = 100
     """
     results = (
         db.query(Announcement.id,Announcement.url, Announcement.title)
-        .filter(
-            Announcement.title.contains("حسابرسی شده"),
-            Announcement.url.isnot(None)
-        )
+        # .filter(
+        #     Announcement.title.contains("حسابرسی شده"),
+        #     Announcement.url.isnot(None)
+        # )
         .order_by(Announcement.published_at.desc())
         .limit(limit)
         .all()

@@ -6,14 +6,12 @@ import json
 import re
 from bs4 import BeautifulSoup
 from datetime import datetime
+from scraper.income_statement.label_mapping import label_map
+from scraper.utils import normalize_persian_text
 
 headers = {
     "User-Agent": "Mozilla/5.0"
 }
-
-# A global dictionary to store unique company IDs
-company_name_to_id = {}
-next_company_id = 1  # starting ID
 
 def get_company_name(html):
     soup = BeautifulSoup(html, 'html.parser')
@@ -128,7 +126,9 @@ def extract_from_html_table(html: str) -> pd.DataFrame | None:
         return None
 
 
-async def extract_income_statement(url: str) -> pd.DataFrame | None:
+from postprocess import convert_df_to_record
+
+async def extract_income_statement(url: str, source_url: str, announcement_id: int) -> pd.DataFrame | None:
     """
     Asynchronously extracts income statement from a Codal report (either from embedded JSON or fallback HTML).
     """
@@ -143,12 +143,12 @@ async def extract_income_statement(url: str) -> pd.DataFrame | None:
         df = extract_from_json(html)
         if df is not None:
             print(f"✅ Extracted using JSON datasource: {url}")
-            return df
+            return convert_df_to_record(df, source_url, announcement_id)
 
         df = extract_from_html_table(html)
         if df is not None:
             print(f"🔁 Extracted from HTML table: {url}")
-            return df
+            return convert_df_to_record(df, source_url, announcement_id)
 
         print(f"⚠️ No data extracted from: {url}")
         return None

@@ -2,8 +2,8 @@
 
 import asyncio
 import pandas as pd
-from scraper.link_collector import get_announcement_links
-from scraper.income_statement import extract_income_statement  # should be async too
+from scraper.income_statement.link_collector import get_announcement_links
+from scraper.income_statement.income_statement import extract_income_statement  # should be async too
 from db.base import SessionLocal
 from db.crud import insert_announcement
 import asyncio
@@ -71,10 +71,10 @@ async def process_announcement(announcement: dict):
     url = announcement["url"]
     announcement_id = announcement["id"]
 
-    df = await extract_income_statement(url)
+    df = await extract_income_statement(url, source_url=url, announcement_id=announcement_id)
     if df is not None:
         with SessionLocal() as db:
-            insert_income_statement(db, df, source_url=url, announcement_id=announcement_id)
+            insert_income_statement(db, df)
 
 
 async def run_income_scraper(limit=50):

@@ -103,8 +103,4 @@ label_map = {
     "سود (زیان) پایه هر سهم:": "basic_earnings_loss_per_share_colon",
     "هزینه های عملیاتی": "operating_expenses",
     "هزینه ‏هاى حقوق, دستمزد و مزایا": "salaries_wages_benefits_expense"
-
-
-
-
 }
