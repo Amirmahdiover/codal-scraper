@@ -77,7 +77,7 @@ async def process_announcement(announcement: dict):
             insert_income_statement(db, df)
 
 
-async def run_income_scraper(limit=50):
+async def run_income_scraper(limit=4000):
     with SessionLocal() as db:
         announcements = get_audited_notsubtitles_income_statement_urls(db, limit=limit)
 

@@ -1,0 +1,22 @@
+{
+  "سود (زیان) خالص": "net_income",
+  "سایر درآمدها": "other_operating_income",
+  "هزینه های فروش, اداری و عمومی": "sg&a",
+  "سود عملیاتی": "operating_profit",
+  "زیان غیرعملیاتی ناشی از فروش دارایی": "non_operating_loss_from_asset_sale",
+  "درآمد اجاره": "rental_income",
+  "درآمدهای صادراتی": "export_income",
+  "سود نقدی هر سهم": "dividend_per_share",
+  "درآمد حاصل از فروش دارایی": "asset_sale_income",
+  "جریانات نقدی فعالیت‌های تامین مالی": "financing_cash_flows",
+  "مالیات بر درآمد": "income_tax",
+  "بهای تمام شده خدمات": "cogs_service",
+  "سود تلفیقی دوره جاری": "current_period_consolidated_profit",
+  "سود هر سهم عادی": "regular_eps",
+  "درآمد بهره": "interest_income",
+  "هزینه حقوق و دستمزد": "wage_expense",
+  "بازده سرمایه‌گذاری": "return_on_investment",
+  "جریانات نقدی ناشی از سرمایه‌گذاری": "investment_cash_flows",
+  "بهای تمام شده انتسابی": "cogs",
+  "هزینه هاى مالى": "financial_expense"
+}

@@ -41,24 +41,24 @@ import re
 def normalize_persian_text(text: str) -> str:
     if not text:
         return ""
-    
-    text = text.strip().lower()
+
+    text = text.strip()
 
     replacements = {
         "ي": "ی",
         "ك": "ک",
-        # "‌": "",     # ZWNJ
-        "‍": "",     # ZWJ
-        "ـ": "",     # Tatweel
+        "‌": "",    # ZWNJ
+        "‍": "",    # ZWJ
+        "‏": "",    # RLM
+        "ـ": "",    # Tatweel
         "،": ",",
-        "“": "\"", "”": "\"",  # Quotation mark normalization
+        "“": "\"", "”": "\"",
         "‘": "'", "’": "'",
     }
 
     for src, target in replacements.items():
         text = text.replace(src, target)
 
-    # Collapse multiple spaces to one
     text = re.sub(r"\s+", " ", text)
 
     return text

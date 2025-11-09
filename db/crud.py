@@ -67,26 +67,22 @@ def insert_announcement(db, raw_data):
     db.add(ann)
     db.commit()
 
-import pandas as pd
-from db.models import IncomeStatement
+# crud.py
+from db.auto_income import IncomeStatement
+from sqlalchemy.exc import SQLAlchemyError
+def insert_income_statement(db, record: dict):
+    # Convert any Series to scalar values just in case
+    cleaned_record = {k: (v.iloc[0] if hasattr(v, 'iloc') else v) for k, v in record.items()}
 
-
-import os
-
-def insert_income_statement(db: Session, df: pd.DataFrame):
-    """
-    Transforms and inserts income statement into SQL in pivoted format.
-    One row per company.
-    Logs normalized labels that are not found in label_map, without duplicates.
-    """
-    if df is None or df.empty:
-        return
-
-    print("✅ Record ready for insert:", df)
-    income_stmt = IncomeStatement(**df)
-    db.add(income_stmt)
-    db.commit()
-
+    try:
+        stmt = IncomeStatement(**cleaned_record)
+        db.add(stmt)
+        db.commit()
+        db.refresh(stmt)
+        print("✅ Inserted income statement successfully.")
+    except SQLAlchemyError as e:
+        db.rollback()
+        print(f"❌ Error inserting income statement: {e}")
 
 
 def get_audited_notsubtitles_income_statement_urls(db: Session, limit: int = 100) -> list[str]:
@@ -96,10 +92,10 @@ def get_audited_notsubtitles_income_statement_urls(db: Session, limit: int = 100
     """
     results = (
         db.query(Announcement.id,Announcement.url, Announcement.title)
-        # .filter(
-        #     Announcement.title.contains("حسابرسی شده"),
-        #     Announcement.url.isnot(None)
-        # )
+        .filter(
+            Announcement.title.contains("حسابرسی شده"),
+            Announcement.url.isnot(None)
+        )
         .order_by(Announcement.published_at.desc())
         .limit(limit)
         .all()

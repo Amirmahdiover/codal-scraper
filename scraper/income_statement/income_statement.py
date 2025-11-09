@@ -6,8 +6,6 @@ import json
 import re
 from bs4 import BeautifulSoup
 from datetime import datetime
-from scraper.income_statement.label_mapping import label_map
-from scraper.utils import normalize_persian_text
 
 headers = {
     "User-Agent": "Mozilla/5.0"
@@ -126,9 +124,9 @@ def extract_from_html_table(html: str) -> pd.DataFrame | None:
         return None
 
 
-from postprocess import convert_df_to_record
+from .postprocess import convert_df_to_record
 
-async def extract_income_statement(url: str, source_url: str, announcement_id: int) -> pd.DataFrame | None:
+async def extract_income_statement(url: str, source_url: str="", announcement_id: int=0) -> pd.DataFrame | None:
     """
     Asynchronously extracts income statement from a Codal report (either from embedded JSON or fallback HTML).
     """
@@ -145,10 +143,12 @@ async def extract_income_statement(url: str, source_url: str, announcement_id: i
             print(f"✅ Extracted using JSON datasource: {url}")
             return convert_df_to_record(df, source_url, announcement_id)
 
+
         df = extract_from_html_table(html)
         if df is not None:
             print(f"🔁 Extracted from HTML table: {url}")
             return convert_df_to_record(df, source_url, announcement_id)
+
 
         print(f"⚠️ No data extracted from: {url}")
         return None
@@ -162,12 +162,15 @@ async def extract_income_statement(url: str, source_url: str, announcement_id: i
 if __name__ == "__main__":
     import asyncio
 
-    test_url = "https://codal.ir/Reports/Decision.aspx?LetterSerial=UKWcG4G2SUDEc32ZHT9Arg%3d%3d&rt=0&let=6&ct=0&ft=-1&sheetId=1"
+    test_url = "https://codal.ir/Reports/Decision.aspx?LetterSerial=fKr0O6UkKY4UAIlFBLcOnw%3d%3d&rt=8&let=6&ct=0&ft=-1"
 
     async def test():
         df = await extract_income_statement(test_url)
         if df is not None:
             print(df)
+            labels = df['label'].dropna().unique().tolist()
+            labels = pd.DataFrame(labels,columns=["label"])
+            labels.to_csv('sharif_abad.csv',index=False)
         else:
             print("No income statement found.")
 
