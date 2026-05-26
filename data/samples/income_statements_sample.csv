@@ -1,21 +1,21 @@
 ﻿company_name,symbol,title,period_ended,operating_revenues,gross_profit,operating_profit,net_income,eps,source_url
-Orion Foods PLC,ORF,Annual audited income statement,2024-12-31,128450000,46230000,21890000,15420000,1.24,https://example.com/reports/orion-foods-2024-income-statement
-Northbridge Steel Ltd,NBS,Annual audited income statement,2024-12-31,98400000,27650000,11980000,7350000,0.68,https://example.com/reports/northbridge-steel-2024-income-statement
-BlueRiver Pharma Inc,BRP,Annual audited income statement,2024-12-31,214700000,139850000,68420000,51260000,3.42,https://example.com/reports/blueriver-pharma-2024-income-statement
-Atlas Retail Group,ARG,Annual audited income statement,2024-12-31,342900000,88600000,35150000,22840000,1.09,https://example.com/reports/atlas-retail-2024-income-statement
-GreenVolt Energy Corp,GVE,Annual audited income statement,2024-12-31,76500000,31850000,12640000,8240000,0.74,https://example.com/reports/greenvolt-energy-2024-income-statement
-Silverline Logistics,SLL,Annual audited income statement,2024-12-31,156300000,42170000,18750000,11390000,0.92,https://example.com/reports/silverline-logistics-2024-income-statement
-Horizon Telecom PLC,HTC,Annual audited income statement,2024-12-31,289600000,117200000,59600000,40450000,2.18,https://example.com/reports/horizon-telecom-2024-income-statement
-Summit Chemicals Ltd,SMC,Annual audited income statement,2024-12-31,112800000,33400000,14270000,9340000,0.81,https://example.com/reports/summit-chemicals-2024-income-statement
-Clearwater Beverages,CWB,Annual audited income statement,2024-12-31,67450000,24890000,10250000,6890000,0.57,https://example.com/reports/clearwater-beverages-2024-income-statement
-NovaTech Components,NVC,Annual audited income statement,2024-12-31,198200000,69250000,28460000,19680000,1.63,https://example.com/reports/novatech-components-2024-income-statement
-Cedar Health Services,CHS,Annual audited income statement,2024-12-31,90500000,36420000,15180000,10760000,0.88,https://example.com/reports/cedar-health-2024-income-statement
-IronPeak Mining Corp,IPM,Annual audited income statement,2024-12-31,141900000,53870000,24930000,17350000,1.35,https://example.com/reports/ironpeak-mining-2024-income-statement
-MetroStyle Apparel,MSA,Annual audited income statement,2024-12-31,58200000,22160000,7450000,4120000,0.39,https://example.com/reports/metrostyle-apparel-2024-income-statement
-Pacific Cloud Systems,PCS,Annual audited income statement,2024-12-31,126700000,89450000,41780000,30240000,2.76,https://example.com/reports/pacific-cloud-2024-income-statement
-Golden Harvest Foods,GHF,Annual audited income statement,2024-12-31,173400000,57680000,22360000,14970000,1.12,https://example.com/reports/golden-harvest-2024-income-statement
-Vertex Auto Parts,VAP,Annual audited income statement,2024-12-31,109600000,29540000,11870000,7640000,0.66,https://example.com/reports/vertex-auto-parts-2024-income-statement
-BrightWave Media,BWM,Annual audited income statement,2024-12-31,48200000,29750000,13860000,9410000,0.95,https://example.com/reports/brightwave-media-2024-income-statement
-Evergreen Packaging,EGP,Annual audited income statement,2024-12-31,73900000,21680000,8560000,5320000,0.47,https://example.com/reports/evergreen-packaging-2024-income-statement
-PrimeGrid Utilities,PGU,Annual audited income statement,2024-12-31,264800000,103200000,47890000,32160000,1.84,https://example.com/reports/primegrid-utilities-2024-income-statement
-OceanGate Shipping,OGS,Annual audited income statement,2024-12-31,132500000,38640000,16420000,9870000,0.79,https://example.com/reports/oceangate-shipping-2024-income-statement
+Kavian Petrochemical Industries,KAVN,Annual audited income statement,2024-12-31,1842500000,612400000,348900000,286700000,2840,https://codal.ir/sample-reports/kavn-2024-income-statement
+Arman Steel Manufacturing,ARMS,Annual audited income statement,2024-12-31,1268700000,318600000,164300000,109500000,1265,https://codal.ir/sample-reports/arms-2024-income-statement
+Nikan Cement Holding,NKCM,Annual audited income statement,2024-12-31,742300000,284900000,137600000,91500000,980,https://codal.ir/sample-reports/nkcm-2024-income-statement
+Parsian Food Products,PRFD,Annual audited income statement,2024-12-31,538400000,167200000,74600000,51200000,640,https://codal.ir/sample-reports/prfd-2024-income-statement
+Damavand Pharmaceutical Group,DMPH,Annual audited income statement,2024-12-31,965800000,574300000,298700000,231900000,3120,https://codal.ir/sample-reports/dmph-2024-income-statement
+Shayan Copper Industries,SHCP,Annual audited income statement,2024-12-31,1196400000,402800000,216500000,158300000,1745,https://codal.ir/sample-reports/shcp-2024-income-statement
+Mehrgan Auto Parts,MHAP,Annual audited income statement,2024-12-31,689500000,193400000,82700000,47600000,520,https://codal.ir/sample-reports/mhap-2024-income-statement
+Tosee Energy Systems,TENG,Annual audited income statement,2024-12-31,1532800000,641900000,352400000,244800000,2360,https://codal.ir/sample-reports/teng-2024-income-statement
+Sepidar Logistics Group,SPDL,Annual audited income statement,2024-12-31,417600000,124800000,53600000,31800000,410,https://codal.ir/sample-reports/spdl-2024-income-statement
+Arian Tile and Ceramic,ARTC,Annual audited income statement,2024-12-31,356900000,129700000,58400000,36700000,455,https://codal.ir/sample-reports/artc-2024-income-statement
+Rayan Telecom Services,RYTS,Annual audited income statement,2024-12-31,842100000,386500000,192800000,139600000,1580,https://codal.ir/sample-reports/ryts-2024-income-statement
+Kourosh Packaging Industries,KRPK,Annual audited income statement,2024-12-31,291400000,88400000,39200000,24100000,305,https://codal.ir/sample-reports/krpk-2024-income-statement
+Baran Dairy Products,BRDY,Annual audited income statement,2024-12-31,614700000,176900000,76300000,48900000,595,https://codal.ir/sample-reports/brdy-2024-income-statement
+Sina Glass Manufacturing,SNGL,Annual audited income statement,2024-12-31,228600000,74500000,31800000,18600000,245,https://codal.ir/sample-reports/sngl-2024-income-statement
+Faraz Mining Development,FRMN,Annual audited income statement,2024-12-31,1379200000,528700000,284900000,206400000,2215,https://codal.ir/sample-reports/frmn-2024-income-statement
+Pishro Medical Equipment,PMEQ,Annual audited income statement,2024-12-31,473200000,268500000,121700000,84300000,1120,https://codal.ir/sample-reports/pmeq-2024-income-statement
+Navid Refinery Products,NVRP,Annual audited income statement,2024-12-31,2146500000,742800000,396200000,301500000,3260,https://codal.ir/sample-reports/nvrp-2024-income-statement
+Alborz Construction Materials,ALCM,Annual audited income statement,2024-12-31,512900000,151600000,64200000,38900000,470,https://codal.ir/sample-reports/alcm-2024-income-statement
+Vista Software Solutions,VSTS,Annual audited income statement,2024-12-31,184700000,129300000,68100000,49300000,890,https://codal.ir/sample-reports/vsts-2024-income-statement
+Payam Agro Industries,PAGR,Annual audited income statement,2024-12-31,398500000,116400000,49200000,29600000,365,https://codal.ir/sample-reports/pagr-2024-income-statement
