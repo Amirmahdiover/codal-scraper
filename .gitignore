@@ -51,3 +51,25 @@ env/
 
 # Misc
 *.lock
+
+
+
+.env
+*.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+*.db
+*.sqlite
+*.sqlite3
+
+output/*
+!output/.gitkeep
+
+data/raw/*
+data/private/*
+
+archive/
