@@ -77,7 +77,7 @@ async def process_announcement(announcement: dict):
             insert_income_statement(db, df)
 
 
-async def run_income_scraper(limit=4000):
+async def run_income_scraper(limit=50):
     with SessionLocal() as db:
         announcements = get_audited_notsubtitles_income_statement_urls(db, limit=limit)
 
@@ -86,5 +86,5 @@ async def run_income_scraper(limit=4000):
 # --- Run ---
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)
-    asyncio.run(run_income_scraper())
+    asyncio.run(run_income_scraper(limit=50))
 
