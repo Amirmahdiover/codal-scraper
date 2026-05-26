@@ -34,7 +34,7 @@ The scraper can:
 - Financial label mapping
 - SQLAlchemy database layer
 - Sample output structure for portfolio/demo use
-
+> Note: The sample CSV uses synthetic English demo data for portfolio presentation. The scraper itself is designed to extract and normalize financial statements from CODAL reports.
 ---
 
 ## Tech Stack
