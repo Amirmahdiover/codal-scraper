@@ -4,17 +4,17 @@ This project collects CODAL announcements, extracts income statement data from r
 
 ```mermaid
 flowchart TD
-    A[CODAL Website/API] --> B[Async Announcement Scraper]
-    B --> C[Report URL Collector]
-    C --> D[Income Statement Extractor]
-    D --> E{Data Source}
-    E --> F[Embedded JSON Parser]
-    E --> G[HTML Table Fallback]
-    F --> H[Persian Label Normalizer]
+    A["CODAL Website/API"] --> B["Async Announcement Scraper"]
+    B --> C["Report URL Collector"]
+    C --> D["Income Statement Extractor"]
+    D --> E{"Data Source"}
+    E --> F["Embedded JSON Parser"]
+    E --> G["HTML Table Fallback"]
+    F --> H["Persian Label Normalizer"]
     G --> H
-    H --> I[Clean Financial Fields]
-    I --> J[SQL Server / CSV / JSON Output]
-
+    H --> I["Clean Financial Fields"]
+    I --> J["SQL Server / CSV / JSON Output"]
+```
 
 
 
