@@ -176,7 +176,7 @@ company_name
 symbol
 title
 period_ended
-operating_income
+operating_revenues
 gross_profit
 net_income
 eps
